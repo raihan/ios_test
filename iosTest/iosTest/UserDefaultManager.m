@@ -15,7 +15,6 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *storedString = [defaults objectForKey:keyName];
 	[defaults synchronize];
-	
 	return storedString;
 }
 - (NSMutableArray *) readArrayFromUserDefaults:(NSString*) keyName
@@ -23,7 +22,6 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableArray *storedArray = [defaults objectForKey:keyName];
 	[defaults synchronize];
-	
 	return storedArray;
 }
 
@@ -33,8 +31,7 @@
 	NSData *data = [defaults objectForKey:keyName];
 	NSArray *myArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [defaults synchronize];
-	
-	return [myArray mutableCopy];
+	return [NSMutableArray arrayWithArray:myArray];
 }
 
 - (void) writeDataToUserDefaults:(NSString *) keyName withArray:(NSMutableArray *) myArray
@@ -50,7 +47,6 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:myString forKey:keyName];
 	[defaults synchronize];
-	
 }
 
 - (void) writeArrayToUserDefaults:(NSString *) keyName withArray:(NSMutableArray *) myArray

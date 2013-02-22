@@ -68,4 +68,36 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidUnload
+{
+    [super viewDidUnload];
+    [nameLabel release];
+    [lastUpdatedDateLabel release];
+    [lastUpdatedByLabel release];
+    [linkTxtView release];
+    [createdDateLabel release];
+    [pathLabel release];
+    [sizeLabel release];
+    [statusLabel release];
+    [isSharedLabel release];
+    [relPathLabel release];
+    [content release];
+}
+
+-(void) dealloc
+{
+    [super dealloc];
+    nameLabel = nil;
+    lastUpdatedDateLabel = nil;
+    lastUpdatedByLabel = nil;
+    linkTxtView = nil;
+    createdDateLabel = nil;
+    pathLabel = nil;
+    sizeLabel = nil;
+    statusLabel = nil;
+    isSharedLabel = nil;
+    relPathLabel = nil;
+    content = nil;
+}
+
 @end

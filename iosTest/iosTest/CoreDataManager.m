@@ -66,6 +66,7 @@
                                               error:&error];
     
     NSLog(@"total C= %d",[objects count]);
+    [request release];
     return [NSMutableArray arrayWithArray:objects];
 }
 
@@ -82,8 +83,9 @@
     NSError *err;
     NSUInteger count = [context countForFetchRequest:request error:&err];
     if(count == NSNotFound) {
-        return 0;
+        NSLog(@"ERROR FOUND!!!");
     }
+    [request release];
     return count;
 }
 

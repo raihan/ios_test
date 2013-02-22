@@ -20,7 +20,7 @@
     NSDictionary *jsonDictionary = [jsonParser objectWithString:fileContent error:&error];
     CoreDataManager *coreDataManager = [[CoreDataManager alloc] init];
 
-    FileDrive *myFileDrive = [[FileDrive alloc] init];
+    FileDrive *myFileDrive = [[[FileDrive alloc] init] autorelease];
     [myFileDrive setTotalSpace:[[self getNestedKeyVal:jsonDictionary key1:@"totalSpace" key2:nil key3:nil] doubleValue]];
     [myFileDrive setLast_rev_id:[[self getNestedKeyVal:jsonDictionary key1:@"last_rev_id" key2:nil key3:nil] doubleValue]];
     [myFileDrive setUsedSpace:[[self getNestedKeyVal:jsonDictionary key1:@"usedSpace" key2:nil key3:nil] doubleValue]];
@@ -51,13 +51,15 @@
     [myFileDrive setSharedFileId: [self getNestedKeyVal:jsonDictionary key1:@"shared_files" key2:@"id" key3:nil]];
     [myFileDrive setSharedFileName: [self getNestedKeyVal:jsonDictionary key1:@"shared_files" key2:@"name" key3:nil]];
     NSLog(@"my file myFileDrive.sharedFileName %@",myFileDrive.sharedFileName);
+    [jsonParser release];
+    [coreDataManager release];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_GET_JSON_DATA_DONE object:myFileDrive];
     return myFileDrive;
 }
 
 -(Content *)parseContentData :(NSDictionary *)jsonDictionary
 {
-    Content *content = [[Content alloc] init];
+    Content *content = [[[Content alloc] init] autorelease];
     [content setStatus:[self getNestedKeyVal:jsonDictionary key1:@"status" key2:nil key3:nil]];
     [content setIs_shared:[self getNestedKeyVal:jsonDictionary key1:@"is_shared" key2:nil key3:nil]];
     [content setShare_id:[self getNestedKeyVal:jsonDictionary key1:@"share_id" key2:nil key3:nil]];
